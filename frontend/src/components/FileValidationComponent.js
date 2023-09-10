@@ -1,17 +1,32 @@
 import React, { useState } from "react";
 import axiosInstance from "../axiosConfig";
 
-function FileValidationComponent({ onValidationSuccess }) {
+function FileValidationComponent({ onValidationSuccess, onFileChange }) {
   const [file, setFile] = useState(null);
   const [validationErrors, setValidationErrors] = useState([]);
   const [validatedProducts, setValidatedProducts] = useState([]);
   const [validationMessage, setValidationMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const resetStates = () => {
+    setValidationErrors([]);
+    setValidatedProducts([]);
+    setValidationMessage("");
+  };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+    resetStates();
+
+    // Quando um novo arquivo é selecionado, notificamos o App.js para resetar os produtos validados.
+    if (typeof onFileChange === "function") {
+      onFileChange();
+    }
+  };
+
   const handleFileValidation = async () => {
     setIsLoading(true);
 
-    // Primeiro, fazemos o upload do arquivo.
     const formData = new FormData();
     formData.append("file", file);
 
@@ -19,8 +34,6 @@ function FileValidationComponent({ onValidationSuccess }) {
 
     try {
       await axiosInstance.post("/products/upload", formData);
-
-      // Se o upload for bem-sucedido, então fazemos a validação.
       productResponse = await axiosInstance.get("/products/validate");
 
       setValidationMessage(productResponse.data.message || "");
@@ -41,6 +54,7 @@ function FileValidationComponent({ onValidationSuccess }) {
         (productResponse && productResponse.data.errors) || [];
       const productsFromResponse =
         (productResponse && productResponse.data.products) || [];
+
       if (errorsFromResponse.length === 0 && productsFromResponse.length > 0) {
         onValidationSuccess(productsFromResponse);
       }
@@ -63,7 +77,7 @@ function FileValidationComponent({ onValidationSuccess }) {
 
   return (
     <div>
-      <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+      <input type="file" onChange={handleFileChange} />
       <button onClick={handleFileValidation} disabled={!file || isLoading}>
         {isLoading ? "Validando..." : "Validar"}
       </button>

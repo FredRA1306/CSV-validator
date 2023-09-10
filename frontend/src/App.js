@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-
-import UploadComponent from './components/UploadComponent';
-import ValidationComponent from './components/ValidationComponent';
-import UpdateComponent from './components/UpdateComponent';
-import FileValidationComponent from './components/FileValidationComponent';
+import React, { useState } from "react";
+import FileValidationComponent from "./components/FileValidationComponent";
+import UpdateComponent from "./components/UpdateComponent";
 
 function App() {
-    const [validationResults, setValidationResults] = useState([]);
-    const [updateAllowed, setUpdateAllowed] = useState(false);
-    const [validatedProducts, setValidatedProducts] = useState([]);
+  const [validatedProducts, setValidatedProducts] = useState([]);
 
-    return (
-        <div>
-            <FileValidationComponent onValidationSuccess={setValidatedProducts}/>
+  return (
+    <div>
+      <FileValidationComponent
+        onValidationSuccess={setValidatedProducts}
+        onFileChange={() => setValidatedProducts([])} // Resetar o array de produtos validados
+      />
 
-            {/* Mostrando UpdateComponent se a atualização for permitida */}
-            {validatedProducts.length > 0 && <UpdateComponent products={validatedProducts} />}
-        </div>
-    );
+      {/* Renderiza o UpdateComponent se existirem produtos validados */}
+      {validatedProducts.length > 0 && (
+        <UpdateComponent products={validatedProducts} />
+      )}
+    </div>
+  );
 }
 
 export default App;

@@ -144,7 +144,5 @@ A aplicação está rodando os seguintes requisitos mínimos do projeto:
 4. Validação do arquivo CSV conforme o reajuste de preços passado no arquivo respeitando a regra dos 10% máximos de reajuste, impedindo caso passe do limite.
 ## Requisitos Pendentes
 O único requisito mínimo não atingido até esse momento é permitir o reajuste dos preços dos *produtos* atravéz da atualização dos preços dos *pacotes*. A base dessa regra de negócio já foi iniciada, porém ainda não finalizada.
-## Bugs conhecidos
-Até o momento a aplicação possui um erro ao adicionar o arquivo ao sistema, sendo necessário clicar duas vezes no botão de *Validar* para que possa aparecer o botão de *Atualizar* para mudar os dados dos produtos no backend da aplicação.
 ## Observações
 A aplicação tem alguns ajustes a serem feitos como refatoração dos códigos e estilização no frontend e ajustes de responsividade. Os componentes podem receber alguns ajustes para melhor manutenção e leitura do código também.

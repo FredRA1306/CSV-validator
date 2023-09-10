@@ -37,7 +37,6 @@ function FileValidationComponent({ onValidationSuccess }) {
         }
       }
 
-      // Mova a verificação para aqui
       const errorsFromResponse =
         (productResponse && productResponse.data.errors) || [];
       const productsFromResponse =

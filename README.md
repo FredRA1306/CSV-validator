@@ -128,9 +128,9 @@ Certifique-se de que todas as dependências foram instaladas corretamente antes 
 
 Ao realizar todas as inicializações do projeto, tanto no servidor backend quanto na aplicação frontend, carregará no navegador padrão da sua máquina uma página HTML contendo três botões:
 
-**- Escolher arquivo:** Permite que o usuário selecione o arquivo CSV desejado.
+**- Escolher arquivo:** Permite que o usuário selecione o arquivo CSV desejado. O arquivo CSV precisa conter algumas informações com padrão expecífico, como code, new_price e name. O padrão de escrita do CSV pode ser conferido nos arquivos da pasta CSV-validator/backend/upload (onde ficam armazenados os arquivos após upload pela aplicação).
 
-**- Verificar:** Permite que o sistema faça a leitura e verificação do arquivo selecionado, retornando se o arquivo está de acordo com as regras de negócio da aplicação ou não. Caso esteja, o botão 'Atualizar' ficará habilitado.
+**- Verificar:** Permite que o sistema faça a leitura e verificação do arquivo selecionado, retornando se o arquivo está de acordo com as regras de negócio da aplicação ou não. Caso esteja, o botão 'Atualizar' ficará habilitado. A verificação só será aceita caso as regras de negócio sejam atendidas e o CSV esteja no padrão da aplicação, como comentado no item anterior e conforme os padrões dos arquivos na pasta upload. Caso algum item com código inexistente no banco seja incerido, ele não será validado pelo sistema.
 
 **- Atualizar:** Caso todos os dados sejam válidos este botão ficará habilitado e permitirá enviar os dados novos para o backend atualizando nosso banco de dados.
 
